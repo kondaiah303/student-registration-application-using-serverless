@@ -1,0 +1,55 @@
+org: kondaiah
+app: myfirstproject
+service: studentapplicationproject
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.8
+
+plugins:
+  - serverless-offline
+
+functions:
+  create_student_handler:
+    handler: student_application_handler.create_student_handler
+    events:
+      - http:
+          method: post
+          path: /v1/student
+
+  get_student_handler:
+    handler: student_application_handler.get_student_handler
+    events:
+      - http:
+          method: get
+          path: /v1/student
+
+  get_all_student_data_handler:
+    handler: student_application_handler.get_all_student_data_handler
+    events:
+      - http :
+          method: get
+          path: /v1/student_all
+
+  update_student_data_handler:
+    handler: student_application_handler.update_student_data_handler
+    events:
+      - http:
+          method: put
+          path: /v1/student
+
+  delete_student_data_handler:
+    handler: student_application_handler.delete_student_data_handler
+    events:
+      - http:
+          method: delete
+          path: /v1/delete_student_data
+
+
+custom:
+  serverless-offline:
+    prefix: ''
+    noPrependStageInUrl: true
+
